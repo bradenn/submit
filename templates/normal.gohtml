@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{template "header"}}
+
+<body>
+<div class="container ">
+    <div class="row">
+        <div class="col-12 g-2 mb-4">
+            {{template "navbar"}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-2 g-1"></div>
+        <div class="col-12 col-lg-3 g-1">
+            <span class="mx-2 mb-3 fw-bold" style="font-size: 34px; line-height: 41px;">Submission</span>
+            <div class="mx-2 small text-background-secondary">{{.Id}}</div>
+            <div class="card-container mx-2 mb-3 mt-2">
+                <div class="card-label">
+                    <div class="flex-grow-1">Meta</div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                <div>Student</div>
+                            </div>
+                            <a class="d-flex align-items-center text-decoration-none text-elevated-secondary" href="#"
+                               style="cursor: pointer;">
+                                bcnicholson&nbsp;&nbsp;<div class="fw-bold text-elevated-tertiary"><i
+                                            class="fa fa-chevron-right fa-sm"></i></div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                <div>Course</div>
+                            </div>
+                            <a class="d-flex align-items-center text-decoration-none text-elevated-secondary" href="#"
+                               style="cursor: pointer;">
+                                CSCI 211&nbsp;&nbsp;<div class="fw-bold text-elevated-tertiary"><i
+                                            class="fa fa-chevron-right fa-sm"></i></div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                <div>Assignment</div>
+                            </div>
+                            <a class="d-flex align-items-center text-decoration-none text-elevated-secondary" href="#"
+                               style="cursor: pointer;">
+                                Linked Lists 3&nbsp;&nbsp;<div class="fw-bold text-elevated-tertiary"><i
+                                            class="fa fa-chevron-right fa-sm"></i></div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="card-container mx-2 mb-3">
+                <div class="card-label">
+                    <div class="flex-grow-1">Files</div>
+                </div>
+                <ul class="list-group">
+                    {{range .Files}}
+                        <li class="list-group-item list-offset"  data-bs-toggle="modal" data-bs-target="#{{.Id}}"
+                            style="cursor: pointer;">
+                                <div class="list-flex-group list-offset ">
+                                    <div class="list-icon d-flex align-items-center">
+                                        <i class="fa fa-file-alt fs-6 mx-1 text-elevated-secondary"></i>
+                                        <div class="list-label mx-2">
+                                            <div>{{ .Name }}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="fw-bold text-elevated-tertiary">
+                                        <i class="fa fa-chevron-right fa-sm"></i>
+                                    </div>
+
+                                </div>
+                                <div>{{template "fileModal" .}}</div>
+                        </li>
+                    {{else}}
+                        <li class="list-group-item" href="">
+                            <div class="list-flex-group justify-content-center">
+                                <div class="list-label">
+                                    <a href="#" class="text-elevated-secondary text-decoration-none">
+                                        No files
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {{end}}
+                </ul>
+            </div>
+            <div class="card-container mx-2 mb-3">
+
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <div class="list-flex-group justify-content-center">
+                            <div class="list-label">
+                                <a href="#" class="text-primary text-decoration-none">
+                                    View Repository
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="list-flex-group justify-content-center">
+                            <div class="list-label">
+                                <a href="#" class="text-primary text-decoration-none">
+                                    Download .tar.gz
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5 g-1">
+            <span class="mx-1 mb-3 fw-bold" style="font-size: 34px; line-height: 41px;"></span>
+            <div class="card-container mx-2 mb-3">
+                <div class="card-label">
+                    <div class="flex-grow-1">1. Evaluation</div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                <div>Make</div>
+                            </div>
+                            <div><span class="px-2">Success</span><i class="fa fa-check-circle text-success"></i></div>
+                        </div>
+
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                <div class="">Memory Leaks</div>
+
+                            </div>
+                            <div><span class="px-2">2 Bytes</span><i class="fa fa-check-circle text-success"></i></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                <div class="">Code Coverage</div>
+
+                            </div>
+                            <div><span class="px-2">97%</span><i class="fa fa-check-circle text-success"></i></div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="card-container mx-2 mb-3">
+                <div class="card-label">2. Unit Tests</div>
+                <ul class="list-group ">
+                    {{range .Units}}
+
+                        <li class="list-group-item">
+                            <div class="list-flex-group">
+                                <div class="list-label">
+                                    <span class="">{{.Name}}</span>&nbsp;&nbsp;<span
+                                            class="text-elevated-secondary">Basic stdin/out examination</span>
+                                </div>
+                                <div><i class="fa fa-check-circle text-success"></i></div>
+                            </div>
+                        </li>
+                    {{end}}
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label text-elevated-secondary">
+                                + 3 more
+                            </div>
+                            <span class="text-primary">Show More</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-container mx-2 mb-3">
+                <div class="card-label">3. Results</div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                Compilation
+                            </div>
+                            <div>1/1 Passed</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                Unit tests
+                            </div>
+                            <div>3/3 Passed</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="list-flex-group">
+                            <div class="list-label">
+                                Memory Leaks
+                            </div>
+                            <div>2/2 Passed</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="">
+                        <div class="list-flex-group ">
+                            <div class="list-label ">
+                                Result
+                            </div>
+                            <div class="text-success fw-bolder">PASSED</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

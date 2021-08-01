@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: Submit
+  description: Subit your homework, scrub.
+  version: 1.0.0
+servers:
+  - url: 'localhost'
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - username
+        - first
+        - last
+        - email
+        - password
+      properties:
+        username:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+        email:
+          type: string
+        password:
+            type: string
+        uuid:
+          type: string
+      discriminator:
+        propertyName: uuid
+    Course:
+      type: object
+      required:
+        - name
+        - identifier
+        - instructor
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        instructor:
+          type: string
+        uuid:
+          type: string
+      discriminator:
+        propertyName: uuid
+    Assignment:
+      type: object
+      required:
+        - name
+        - identifier
+        - course
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        course:
+          type: string
+        uuid:
+          type: string
+      discriminator:
+        propertyName: uuid
+    Submission:
+      type: object
+      required:
+        - name
+        - student
+        - assignment
+        - files
+        - comment
+      properties:
+        name:
+          type: string
+        student:
+          type: string
+        assignment:
+          type: string
+        files:
+          type: array
+        comment:
+          type: string
+        uuid:
+          type: string
+      discriminator:
+        propertyName: uuid
+    Result:
+      type: object
+      required:
+        - name
+        - submission
+        - summary
+        - passed
+      properties:
+        name:
+          type: string
+        submission:
+          type: string
+        summary:
+          type: string
+        passed:
+          type: boolean
+        uuid:
+          type: string
+      discriminator:
+        propertyName: uuid
+paths:
+  /user:
+    post:
+      summary: Create a new User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Created
+  /user/{uuid}:
+    get:
+      summary: Get User from uuid
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /course:
+    post:
+      summary: Creates a new course.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '201':
+          description: Created
+  /course/{uuid}:
+    get:
+      summary: Get a course by its UUID.
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+  /assignments:
+    get:
+      summary: Get a course by its UUID.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Assignment'
+
+  /assignments/{uuid}:
+    get:
+      summary: Get an assignment by its UUID.
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+  /assignments/{uuid}/submissions/{uuid}:
+    get:
+      summary: Get assignment submissions by the assignment UUID.
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+  /submissions/{uuid}/results:
+    get:
+      summary: Get results from the services UUID.
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submissions'

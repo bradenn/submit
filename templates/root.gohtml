@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{template "header"}}
+
+<body>
+<div class="container ">
+    <div class="row">
+        <div class="col-12 col-lg-1 g-1"></div>
+        <div class="col-10 g-2 mb-2">
+            {{template "navbar"}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-1 g-1"></div>
+        <div class="col-12 col-lg-6 g-1">
+            <div class="card-container mx-2 mb-3">
+                <h6 class="fw-bold mx-4">
+                    CSCI 211
+                </h6>
+                <div class="card px-4 py-2 fw-bold d-flex justify-content-between flex-row">
+                    <div>
+                        Assignment 12
+                    </div>
+                    <div class="text-success">
+                        <a href="/submission/create" target="_top">Create Random Submission</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-1 g-1"></div>
+        <div class="col-12 col-lg-6 g-1">
+            <div class="card-container mx-2 mb-3">
+                <div class="card-label">
+                    <div class="flex-grow-1">Submissions</div>
+                </div>
+                <ul class="list-group">
+                    {{range .Submissions}}
+                        <li class="list-group-item">
+                            <div class="list-flex-group">
+                                <div class="list-label">
+                                    <div class="">{{.Name}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    {{else}}
+                        <li class="list-group-item">
+                            <div class="list-flex-group">
+                                <div class="list-label">
+                                    <div class="">{{.Submissions}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

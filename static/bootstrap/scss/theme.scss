@@ -1,0 +1,360 @@
+@import "functions";
+
+@import "variables";
+
+* {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-family: "Roboto", sans-serif !important;
+  letter-spacing: .2px;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+
+$ti-dark-background: rgb(37, 42, 49);
+
+$mono-d1: rgba(0, 0, 0, 1);
+$mono-d2: rgb(26, 26, 28);
+$mono-d3: rgb(44, 44, 46);
+$mono-d4: rgb(56, 63, 76);
+$mono-d5: rgb(130, 130, 136);
+
+$mono-dt: rgb(62, 62, 65);
+
+$mono-light: rgb(242, 242, 247);
+$mono-light2: rgb(141, 141, 142);
+$mono-muted: $mono-d5;
+
+
+$dark: $mono-d1;
+
+$primary: rgb(10, 132, 255);
+$primary-secondary: darken($primary, 42);
+$success: rgb(48, 209, 88);
+
+$elevated: rgb(28, 28, 30);
+$elevated-primary: rgb(255, 255, 255);
+$elevated-secondary: rgb(152, 152, 153);
+$elevated-tertiary: rgb(90, 90, 93);
+$elevated-quaternary: rgb(44, 44, 46);
+
+$background: $mono-d1;
+$background-primary: rgb(255, 255, 255);
+$background-secondary: rgb(141, 141, 147);
+
+
+$theme-colors: (
+        "primary": $primary,
+        "primary-secondary": $primary-secondary,
+        "secondary": $secondary,
+        "success": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "light": $light,
+        "dark": $dark,
+        "background": $background,
+        "background-primary":$background-primary,
+        "background-secondary": $background-secondary,
+        "elevated": $elevated,
+        "elevated-primary": $elevated-primary,
+        "elevated-secondary": $elevated-secondary,
+        "elevated-tertiary": $elevated-tertiary,
+        "elevated-quaternary": $elevated-quaternary,
+);
+
+$aspect-ratios: (
+        "1x1": 100%,
+        "4x3": calc(3 / 4 * 100%),
+        "16x9": calc(9 / 16 * 100%),
+        "21x9": calc(9 / 21 * 100%),
+        "8_5x11": calc(11 / 8.5 * 100%),
+);
+
+
+// Default variable overrides
+$border-color: $mono-d3;
+$body-bg: $mono-d1;
+$body-color: $mono-light;
+$text-muted: $mono-muted;
+
+// List Group
+$list-group-bg: $elevated;
+$list-group-color: rgb(187, 187, 187);
+$list-group-item-padding-y: 1em;
+$list-group-item-padding-x: 1.5em;
+$list-group-border-radius: 8px;
+html {
+
+}
+
+.list-group {
+  border: none !important;
+}
+
+.list-group-nested > .list-group-item {
+  background-color: lighten($elevated, 5) !important;
+  //margin-left: -1.50em;
+  //border-radius: 0 !important;
+}
+
+.list-group-item {
+  font-family: "Roboto", sans-serif !important;
+  //border-color: $border-color !important;
+  color: $elevated-primary !important;
+  border: none !important;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.list-label {
+  color: $elevated-primary !important;
+  font-weight: 400;
+  line-height: 22px;
+  font-size: 17px;
+  //margin-left: 0.5em;
+}
+
+.list-sub-label {
+  color: $elevated-secondary !important;
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 15px;
+  //margin-left: 0.5em;
+}
+
+.list-flex-group {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: $elevated-secondary;
+
+}
+
+.list-group-item.list-offset {
+  padding-left: 0.75em !important;
+}
+
+.list-flex-group::before {
+  content: '';
+  width: calc(100% - 1.5em);
+  flex-wrap: initial;
+  height: 1px;
+  display: flex;
+  flex-shrink: initial;
+  background-color: $elevated-quaternary;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.list-offset::before {
+
+  width: calc(100% - 3em);
+
+}
+
+.list-group > .list-group-item > .list-flex-group::before:last-of-type {
+  opacity: 0;
+}
+
+
+.list-slot {
+  display: flex;
+  justify-content: left;
+}
+
+.list-icon {
+
+}
+
+.list-slot-text {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.list-group > .list-group-item:last-child > .list-flex-group::before {
+  background-color: transparent;
+}
+
+.list-group-item > div.d-flex {
+
+}
+
+// Progress
+
+$progress-bg: $mono-d3;
+
+
+// Card
+$card-bg: $mono-d2;
+$card-border-color: $border-color;
+
+.card {
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.card-label {
+  margin-left: 1.5em !important;
+  padding-bottom: 0.025em;
+  color: $text-muted;
+  font-weight: 400;
+  -webkit-font-smoothing: initial;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-right: 1em;
+  flex-direction: row;
+  font-size: 13px;
+}
+
+.card-header {
+  padding: 0.25em 0.75em !important;
+  margin-bottom: 0.5em !important;
+
+  background-color: $mono-d2 !important;
+}
+
+// Accordion
+$accordion-button-active-bg: $mono-d1;
+$accordion-button-active-color: rgb(200, 200, 200);
+
+.accordion-button {
+  padding: 0.5em 0.75em !important;
+  font-size: 14px !important;
+  font-weight: 500;
+}
+
+$border-radius: 16px;
+
+// Navbar
+$navbar-dark-color: $mono-light;
+$navbar-dark-active-color: $mono-light;
+$navbar-padding-y: 0.25em;
+
+.navbar {
+  margin: 0.75em 0.25em;
+}
+
+.navbar-dark {
+  //background-color: $mono-d2 !important;
+  //border-bottom: 1px solid $border-color;
+  margin-bottom: 0;
+}
+
+.bg-dark {
+  background-color: $mono-d2 !important;
+}
+
+// Unordered List
+.li {
+  background-color: #0dcaf0 !important;
+}
+
+// Files
+.file-root {
+  margin-right: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.file.folder {
+
+}
+
+.file {
+
+}
+
+.preview-file {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.file-details {
+  padding-left: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 14px;
+  color: $background-secondary;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+// Modals
+$modal-content-bg: $elevated;
+$modal-header-border-color: $elevated-quaternary;
+$modal-footer-border-color: $elevated-quaternary;
+
+.modal-header {
+  padding: 0.25em 1.5em !important;
+}
+
+.modal-content {
+  border-radius: 8px !important;
+}
+
+//Control
+$form-select-indicator-color: $primary;
+
+// Text
+.l1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 34px !important;
+  line-height: 42px !important;
+  font-weight: 700;
+}
+
+// Required
+
+@import "utilities";
+
+@import "mixins";
+
+
+// Layout & components
+@import "root";
+@import "reboot";
+@import "type";
+@import "images";
+@import "containers";
+@import "grid";
+@import "tables";
+@import "forms";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "button-group";
+@import "nav";
+@import "navbar";
+@import "card";
+@import "accordion";
+@import "breadcrumb";
+@import "pagination";
+@import "badge";
+@import "alert";
+@import "progress";
+@import "list-group";
+@import "close";
+@import "toasts";
+@import "modal";
+@import "tooltip";
+@import "popover";
+@import "carousel";
+@import "spinners";
+@import "offcanvas";
+
+// Helpers
+@import "helpers";
+
+// Utilities
+@import "utilities/api";
