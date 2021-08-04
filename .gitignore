@@ -1,6 +1,5 @@
 .env
-.idea
+.idea/
 .DS_Store
 
 static/
-!/static/bootstrap/scss/theme.scss

@@ -4,7 +4,7 @@ info:
   description: Subit your homework, scrub.
   version: 1.0.0
 servers:
-  - url: 'localhost'
+  - url: 'localhost:3001'
 components:
   schemas:
     User:
@@ -25,11 +25,11 @@ components:
         email:
           type: string
         password:
-            type: string
-        uuid:
           type: string
+        id:
+          type: uuid
       discriminator:
-        propertyName: uuid
+        propertyName: id
     Course:
       type: object
       required:
@@ -43,10 +43,10 @@ components:
           type: string
         instructor:
           type: string
-        uuid:
+        id:
           type: string
       discriminator:
-        propertyName: uuid
+        propertyName: id
     Assignment:
       type: object
       required:
@@ -60,10 +60,10 @@ components:
           type: string
         course:
           type: string
-        uuid:
+        id:
           type: string
       discriminator:
-        propertyName: uuid
+        propertyName: id
     Submission:
       type: object
       required:
@@ -83,10 +83,10 @@ components:
           type: array
         comment:
           type: string
-        uuid:
+        id:
           type: string
       discriminator:
-        propertyName: uuid
+        propertyName: id
     Result:
       type: object
       required:
@@ -103,10 +103,10 @@ components:
           type: string
         passed:
           type: boolean
-        uuid:
+        id:
           type: string
       discriminator:
-        propertyName: uuid
+        propertyName: id
 paths:
   /user:
     post:
@@ -120,12 +120,12 @@ paths:
       responses:
         '201':
           description: Created
-  /user/{uuid}:
+  /user/{id}:
     get:
-      summary: Get User from uuid
+      summary: Get User from id
       parameters:
         - in: path
-          name: uuid
+          name: id
           required: true
           schema:
             type: string
@@ -148,12 +148,12 @@ paths:
       responses:
         '201':
           description: Created
-  /course/{uuid}:
+  /course/{id}:
     get:
-      summary: Get a course by its UUID.
+      summary: Get a course by its id.
       parameters:
         - in: path
-          name: uuid
+          name: id
           required: true
       responses:
         '200':
@@ -164,7 +164,7 @@ paths:
                 $ref: '#/components/schemas/Course'
   /assignments:
     get:
-      summary: Get a course by its UUID.
+      summary: Get a course by its id.
       responses:
         '200':
           description: OK
@@ -175,12 +175,13 @@ paths:
                 items:
                   $ref: '#/components/schemas/Assignment'
 
-  /assignments/{uuid}:
+  /assignments/{id}:
     get:
-      summary: Get an assignment by its UUID.
+      summary: Get an assignment by its id.
       parameters:
         - in: path
-          name: uuid
+          name: id
+          schema: id
           required: true
       responses:
         '200':
@@ -189,12 +190,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Assignment'
-  /assignments/{uuid}/submissions/{uuid}:
+  /assignments/{id}/submissions/{id}:
     get:
-      summary: Get assignment submissions by the assignment UUID.
+      summary: Get assignment submissions by the assignment id.
       parameters:
         - in: path
-          name: uuid
+          name: id
+          schema: string
           required: true
       responses:
         '200':
@@ -203,12 +205,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Submission'
-  /submissions/{uuid}/results:
+  /submissions/{id}/results:
     get:
-      summary: Get results from the services UUID.
+      summary: Get results from the services id.
       parameters:
         - in: path
-          name: uuid
+          name: id
+          schema: string
           required: true
       responses:
         '200':

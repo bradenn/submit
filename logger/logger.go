@@ -4,23 +4,43 @@ import (
 	"fmt"
 	"github.com/go-git/go-git/v5/plumbing/color"
 	"net/http"
+	"strings"
 	"time"
 )
 
-var logger Logger = Logger{}
+type LogType int
 
-type Logger struct {
-}
+const (
+	info = iota
+	warn
+	panic
+)
 
-func log(format string, args ...string) {
-	fmt.Printf(format, args)
-}
+func log(logType LogType, format string, args ...interface{}) {
+	var prefix string
 
-func Info(format string, args ...interface{}) {
-	timestamp := time.Now().Format(time.Stamp)
-	fmt.Printf("%s[INFO]%s %s - %s%s\n", color.BoldCyan, color.Reset+color.Faint, timestamp, color.Reset,
-		fmt.Sprintf(format,
-			args...))
+	switch logType {
+	case info:
+		prefix = fmt.Sprintf("%s[INFO]%s", color.BoldBlue, color.Reset)
+		break
+	case warn:
+		prefix = fmt.Sprintf("%s[WARN]%s", color.BoldYellow, color.Reset)
+		break
+	case panic:
+		prefix = fmt.Sprintf("%s[ERR*]%s", color.BoldRed, color.Reset+color.Red)
+		break
+	}
+	var body string
+
+	if format == "" {
+		body = fmt.Sprint(args)
+	} else {
+		body = fmt.Sprintf(format, args...)
+	}
+
+	formatted := fmt.Sprintf("%s %s", prefix, body)
+	strings.ReplaceAll(formatted, "Submit", "")
+	fmt.Println(formatted)
 }
 
 func Middleware(handler http.Handler) http.Handler {
@@ -35,17 +55,14 @@ func Middleware(handler http.Handler) http.Handler {
 	return http.HandlerFunc(fn)
 }
 
-func Warn(format string, args ...string) {
-
+func Info(format string, args ...interface{}) {
+	log(info, format, args...)
 }
 
-func Error(format string, args ...interface{}) {
-	timestamp := time.Now().Format(time.Stamp)
-	fmt.Printf("%s[ERR*]%s %s - %s%s\n", color.BoldRed, color.Reset+color.Faint, timestamp, color.Reset+color.Red,
-		fmt.Sprintf(format,
-			args...))
+func Warn(args ...interface{}) {
+	log(warn, "", args...)
 }
 
-func Panic(format string, args ...string) {
-
+func Error(args ...interface{}) {
+	log(panic, "", args...)
 }
